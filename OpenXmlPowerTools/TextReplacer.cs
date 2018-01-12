@@ -163,6 +163,7 @@ namespace OpenXmlPowerTools
                                     if (g.Key == "DontConsolidate")
                                         return (object)g;
                                     string textValue = g.Select(r => r.Element(W.t).Value).StringConcatenate();
+                                    if (textValue.Length == 0) return "";
                                     XAttribute xs = null;
                                     if (textValue[0] == ' ' || textValue[textValue.Length - 1] == ' ')
                                         xs = new XAttribute(XNamespace.Xml + "space", "preserve");
