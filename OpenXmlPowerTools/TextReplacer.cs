@@ -88,7 +88,8 @@ namespace OpenXmlPowerTools
                                 replace, matchCase)));
                         XElement[] subRunArray = paragraphWithSplitRuns
                             .Elements(W.r)
-                            .Where(e => {
+                            .Where(e =>
+                            {
                                 XElement subRunElement = e.Elements().FirstOrDefault(el => el.Name != W.rPr);
                                 if (subRunElement == null)
                                     return false;
@@ -107,7 +108,8 @@ namespace OpenXmlPowerTools
                                 ParagraphChildProjection = pcp,
                                 CharacterToCompare = c,
                             });
-                            bool dontMatch = zipped.Any(z => {
+                            bool dontMatch = zipped.Any(z =>
+                            {
                                 if (z.ParagraphChildProjection.Annotation<MatchSemaphore>() != null)
                                     return true;
                                 bool b;
@@ -132,7 +134,8 @@ namespace OpenXmlPowerTools
                         {
                             List<XElement> elementsToReplace = paragraphWithReplacedRuns
                                 .Elements()
-                                .Where(e => {
+                                .Where(e =>
+                                {
                                     var sem = e.Annotation<MatchSemaphore>();
                                     if (sem == null)
                                         return false;
@@ -165,6 +168,8 @@ namespace OpenXmlPowerTools
                                     if (g.Key == "DontConsolidate")
                                         return (object)g;
                                     string textValue = g.Select(r => r.Element(W.t).Value).StringConcatenate();
+                                    if (textValue.Length == 0) return "";
+
                                     XAttribute xs = null;
                                     if (textValue[0] == ' ' || textValue[textValue.Length - 1] == ' ')
                                         xs = new XAttribute(XNamespace.Xml + "space", "preserve");
